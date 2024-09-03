@@ -1,12 +1,12 @@
 export default function API() {
 
-    const host = false?"http://localhost:8000": ""
+    const host = true?"http://localhost:8000": ""
 
     async function fetchGetApi({url}) {
         try {
             const response = await fetch(host + url, {
                 method: 'GET',
-                credentials: 'same-origin'
+                credentials: 'include'
             });
             if (!response.ok) {
                 console.error('Error fetching:', 'Network response was not ok');
@@ -26,7 +26,8 @@ export default function API() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                credentials: 'include'
             });
 
             if (!response.ok) {
@@ -42,28 +43,21 @@ export default function API() {
     }
 
     async function get_user() {
-        return await fetchGetApi({url: '/web/utils/get_user'})
+        return await fetchGetApi({url: '/get-user/'})
 
     }
 
-    async function logout() {
-        await fetchGetApi({url: '/auth/logout'})
-        window.location.reload();
+
+    async function loginInit(name) {
+        console.log(name)
+        return await fetchPostApi({url: "/login/", data: {name: name}})
     }
 
-    async function loginInit(phone) {
-        return await fetchGetApi({url: '/auth/login/init/' + phone})
-    }
 
-    async function buyInit(buy_parameters) {
-        return await fetchPostApi({url: '/auth/pay/init', data: buy_parameters});
-    }
 
 
     return {
         get_user,
-        logout,
-        buyInit,
         loginInit
     }
 }

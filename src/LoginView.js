@@ -25,7 +25,8 @@ export default function LoginView({user, api}){
         setErrors(newErrors)
 
         if (!newErrors.name) {
-
+            const r = await api.loginInit(formData.name)
+            console.log(r)
         }
 
 
@@ -59,7 +60,7 @@ export default function LoginView({user, api}){
                     required
                 />
             </div>
-            <button className={"tertiary-button large"} onClick={login}>
+            <button onClick={login}>
                 ВОЙТИ
             </button>
         </div>

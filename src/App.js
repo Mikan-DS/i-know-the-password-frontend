@@ -23,6 +23,7 @@ export default function App() {
     useEffect(() => {
         const interval = setInterval(()=>{
             api.get_user().then(r => {
+                console.log(r)
                 if (r !== null) {
                     setUser(r);
                 }
@@ -30,7 +31,7 @@ export default function App() {
                     setUser(defaultUser)
                 }
             });
-        }, 100);
+        }, 1000);
 
         return () => clearInterval(interval);
     }, [user, api]);
