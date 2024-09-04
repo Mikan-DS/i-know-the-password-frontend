@@ -20,7 +20,8 @@ export default function App() {
         team: "",
         is_admin: false,
         extra: null,
-        game: null
+        game: null,
+        answer: null
     }
 
     const [user, setUser] = useState(defaultUser)

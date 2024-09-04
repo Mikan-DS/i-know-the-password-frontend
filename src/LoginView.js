@@ -50,7 +50,7 @@ export default function LoginView({user, api}){
             <div className={errors.name ? "error" : ""}>
                 <label htmlFor="name">{errors.name ? errors.name : "Имя"}</label>
                 <input
-                    className="form-input-text"
+                    className="form-input"
                     type="text"
                     id="name"
                     name="name"

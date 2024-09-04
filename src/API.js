@@ -71,6 +71,9 @@ export default function API() {
     async function sendMessage(message){
         return await fetchPostApi({url: "/send-message/", data: {message: message}})
     }
+    async function sendPassword(message){
+        return await fetchPostApi({url: "/send-password/", data: {message: message}})
+    }
 
     return {
         get_user,
@@ -79,6 +82,7 @@ export default function API() {
         createTeams,
         next,
         reset,
-        sendMessage
+        sendMessage,
+        sendPassword
     }
 }
