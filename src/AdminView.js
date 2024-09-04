@@ -18,7 +18,24 @@ export default function AdminView({user, api}){
     const game = user.game;
 
     async function update() {
-        const r = await api.update()
+        const r = await api.update();
+        if (r !== null){
+            setPlayers(r.players);
+            setTeams(r.teams);
+        }
+    }
+    async function createTeams(){
+        await api.createTeams();
+        await update();
+    }
+
+    async function next(){
+        await api.next()
+    }
+
+    async function reset(){
+        await api.reset();
+        await api.update();
     }
 
 
@@ -26,40 +43,40 @@ export default function AdminView({user, api}){
         <div className={"admin-view"}>
             <a href={"/admin"}>Настройка</a>
 
-            <button>
+            <button onClick={update}>
                 Обновить
             </button>
-            <button>
+            <button onClick={reset}>
                 Сбросить игру
             </button>
-            <button>
+            <button onClick={createTeams}>
                 Собрать команды
             </button>
-            <button>
+            <button onClick={next}>
                 Следующий этап
             </button>
 
             <ul>
                 {players.map((player, index) => (
-                    <li key={index}>{player.name}</li>
+                    <li key={index}>{player}</li>
                 ))}
             </ul>
 
             <h1>
-                Команда 1
+                {teams[0].name}
             </h1>
             <ul>
                 {teams[0].players.map((player, index) => (
-                    <li key={index}>{player.name}</li>
+                    <li key={index}>{player}</li>
                 ))}
             </ul>
 
             <h1>
-                Команда 2
+                {teams[1].name}
             </h1>
             <ul>
                 {teams[1].players.map((player, index) => (
-                    <li key={index}>{player.name}</li>
+                    <li key={index}>{player}</li>
                 ))}
             </ul>
 

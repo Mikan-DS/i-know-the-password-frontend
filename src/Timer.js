@@ -22,6 +22,7 @@ export default function Timer({game}){
         else {
             return null;
         }
+        setState(game.state)
     }
     if (game === null || game.state === 0 || game.state === 3){
         return null;

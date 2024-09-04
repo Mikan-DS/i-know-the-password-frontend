@@ -53,12 +53,27 @@ export default function API() {
     }
 
     async function update(){
-        return await fetchGetApi({url: "/upda"})
+        return await fetchGetApi({url: "/update/"})
     }
 
+    async function createTeams(){
+        return await fetchGetApi({url: "/create-teams/"})
+    }
+
+    async function next(){
+        return await fetchGetApi({url: "/next/"})
+    }
+
+    async function reset(){
+        return await fetchGetApi({url: "/reset/"})
+    }
 
     return {
         get_user,
-        loginInit
+        loginInit,
+        update,
+        createTeams,
+        next,
+        reset
     }
 }
