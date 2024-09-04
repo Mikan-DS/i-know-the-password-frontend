@@ -6,6 +6,8 @@ import './css/containers.css'
 import API from "./API";
 import {useEffect, useState} from "react";
 import LoginView from "./LoginView";
+import PlayerView from "./PlayerView";
+import AdminView from "./AdminView";
 
 let onlyOne = true;
 
@@ -15,7 +17,9 @@ export default function App() {
     const defaultUser = {
         authenticated: false,
         firstname: "",
-        team: ""
+        team: "",
+        is_admin: false,
+        extra: null
     }
 
     const [user, setUser] = useState(defaultUser)
@@ -23,7 +27,6 @@ export default function App() {
     useEffect(() => {
         const interval = setInterval(()=>{
             api.get_user().then(r => {
-                console.log(r)
                 if (r !== null) {
                     setUser(r);
                 }
@@ -45,11 +48,11 @@ export default function App() {
         <div className={"body-text"}>
             Командная игра созданная для студентов колледжа "ТИСБИ" с использованием ИИ.
             <br/>
-            Суть игры заключается в том что команды сначала придумывают инструкции для ИИ для скрытия "секретного"
-            пароля - а команда соперников должны придумать инструкции которые заставят ИИ выдать им этот секретный пароль.
+            Суть игры заключается в том что команда (<span>операторов</span>) сначала придумывают инструкции для ИИ для скрытия "секретного"
+            пароля - а команда соперников (<span>шпионов</span>) должны придумать инструкции которые заставят ИИ выдать им этот секретный пароль.
             На создание инструкций дается 5 минут, а на создание "контр-инструкций" - 10 минут.
         </div>
-        {user.authenticated? null: <LoginView user={user} api={api}/>}
+        {user.authenticated? (user.is_admin?<AdminView user={user} api={api}/>:<PlayerView user={user} api={api}/>): <LoginView user={user} api={api}/>}
     </div>
     );
 }

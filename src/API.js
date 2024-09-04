@@ -49,11 +49,8 @@ export default function API() {
 
 
     async function loginInit(name) {
-        console.log(name)
         return await fetchPostApi({url: "/login/", data: {name: name}})
     }
-
-
 
 
     return {
