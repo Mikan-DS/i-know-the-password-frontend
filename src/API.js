@@ -52,6 +52,10 @@ export default function API() {
         return await fetchPostApi({url: "/login/", data: {name: name}})
     }
 
+    async function update(){
+        return await fetchGetApi({url: "/upda"})
+    }
+
 
     return {
         get_user,

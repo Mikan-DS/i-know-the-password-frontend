@@ -17,6 +17,10 @@ export default function AdminView({user, api}){
 
     const game = user.game;
 
+    async function update() {
+        const r = await api.update()
+    }
+
 
     return (
         <div className={"admin-view"}>
