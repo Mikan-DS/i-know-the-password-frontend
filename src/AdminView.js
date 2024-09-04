@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import Timer from "./Timer";
+import StateDisplay from "./StateDisplay";
 
 export default function AdminView({user, api}){
 
@@ -62,25 +63,22 @@ export default function AdminView({user, api}){
                 ))}
             </ul>
 
-            <h1>
-                {teams[0].name}
-            </h1>
-            <ul>
-                {teams[0].players.map((player, index) => (
-                    <li key={index}>{player}</li>
-                ))}
-            </ul>
+            {
+                teams.map((team, teamIndex) => (
+                    <div>
+                        <h1>
+                            {team.name}
+                        </h1>
+                        <ul>
+                            {team.players.map((player, index) => (
+                                <li key={index}>{player}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
 
-            <h1>
-                {teams[1].name}
-            </h1>
-            <ul>
-                {teams[1].players.map((player, index) => (
-                    <li key={index}>{player}</li>
-                ))}
-            </ul>
-
-
+            <StateDisplay state={user.game.state}/>
             <Timer game={user.game}/>
 
             {game.winner?<div>

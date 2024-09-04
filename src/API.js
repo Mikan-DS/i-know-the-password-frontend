@@ -68,12 +68,17 @@ export default function API() {
         return await fetchGetApi({url: "/reset/"})
     }
 
+    async function sendMessage(message){
+        return await fetchPostApi({url: "/send-message/", data: {message: message}})
+    }
+
     return {
         get_user,
         loginInit,
         update,
         createTeams,
         next,
-        reset
+        reset,
+        sendMessage
     }
 }

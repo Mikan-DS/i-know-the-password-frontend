@@ -26,7 +26,6 @@ export default function LoginView({user, api}){
 
         if (!newErrors.name) {
             const r = await api.loginInit(formData.name)
-            console.log(r)
         }
 
 
